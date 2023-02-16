@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 
 contract RandomWinnerGame is VRFConsumerBase, Ownable {
-    //Chainlink variables
+    // Chainlink variables
     // The amount of LINK to send with the request
     uint256 public fee;
     // ID of public key against which randomness is generated
@@ -90,11 +90,10 @@ contract RandomWinnerGame is VRFConsumerBase, Ownable {
      * @param requestId  this ID is unique for the request we sent to the VRF Coordinator
      * @param randomness this is a random unit256 generated and returned to us by the VRF Coordinator
      */
-    function fulfillRandomness(bytes32 requestId, uint256 randomness)
-        internal
-        virtual
-        override
-    {
+    function fulfillRandomness(
+        bytes32 requestId,
+        uint256 randomness
+    ) internal virtual override {
         // We want out winnerIndex to be in the length from 0 to players.length-1
         // For this we mod it with the player.length value
         uint256 winnerIndex = randomness % players.length;
